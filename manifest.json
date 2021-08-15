@@ -5,17 +5,17 @@
       "background.js"
     ]
   },
-  "description": "allows to copy any image as a base64 data url",
+  "description": "allows to copy any image as a base64 dataURI",
   "icons": {
     "250": "icon.png"
   },
   "manifest_version": 2,
-  "name": "img2b64",
+  "name": "copy-image-as-base64-datauri",
   "permissions": [
     "<all_urls>",
     "menus",
     "clipboardWrite",
     "notifications"
   ],
-  "version": "1.3.1"
+  "version": "1.3.2"
 }

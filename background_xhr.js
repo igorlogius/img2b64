@@ -1,14 +1,16 @@
-const extId = 'img2b64'
+const temporary = browser.runtime.id.endsWith('@temporary-addon'); // debugging?
+const manifest = browser.runtime.getManifest();
+const extname = manifest.name;
 
 async function showNotification(title,message){
 	const options = {
 		"type": "basic",
 		"iconUrl": browser.runtime.getURL("icon.png"),
-		"title": extId + ": " + title,
+		"title": extname + ": " + title,
 		"message": message
 	};
 	try {
-		const nid = await browser.notifications.create(extId, options);
+		const nid = await browser.notifications.create(extname, options);
 		return nid;
 	}catch(err){
 		onError(err, 'failed notificationId.create');
@@ -17,19 +19,19 @@ async function showNotification(title,message){
 }
 
 function onError(e, msg){
-	console.log(`${extId}::onError error: ${e}, message: ${msg}`);
+	console.log(`${extname}::onError error: ${e}, message: ${msg}`);
 }
 
 browser.menus.create({   // menus permission 
-	id: extId,
-	title: extId,
+	id: extname,
+	title: extname,
 	documentUrlPatterns: [ "<all_urls>" ],
 	contexts: ["image" ]
 });
 
 
 browser.menus.onClicked.addListener( async (clickData,tab) => {
-	if(clickData.menuItemId !== extId){
+	if(clickData.menuItemId !== extname){
 		return;
 	}
 
